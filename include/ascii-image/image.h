@@ -16,21 +16,23 @@ typedef struct
     byte *data;
 } image_t;
 
-#define SCALE_SUCCESS 0
-#define SCALE_FAIL 1
-#define SCALE_UNSUPPORTED 2
-#define SCALE_MINIMUM_BOUND 3
+typedef enum
+{
+    SCALE_SUCCESS = 0,
+    SCALE_FAIL,
+    SCALE_UNSUPPORTED,
+    SCALE_MINIMUM_BOUND,
+} image_scale_status_t;
 
-typedef int32_t image_scale_status;
+image_scale_status_t image_scale(dim_t *init_dim, dim_t *res, int new_width);
 
-image_scale_status image_scale(dim_t *init_dim, dim_t *res, int new_width);
+typedef enum
+{
+    LOAD_SUCCESS = 0,
+    LOAD_FAIL
+} image_load_status_t;
 
-#define LOAD_SUCCESS 0
-#define LOAD_FAIL 1
-
-typedef int32_t image_load_status;
-
-image_load_status image_load(const char *fpath, image_t *img, int req_comp);
+image_load_status_t image_load(const char *fpath, image_t *img, int req_comp);
 
 /**
  * NOTE: If `width` is set to be less than `1`, the width will be based on the

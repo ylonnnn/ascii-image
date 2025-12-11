@@ -4,7 +4,7 @@
 #include "ascii-image/image.h"
 #include "ascii-image/utils.h"
 
-image_scale_status image_scale(dim_t *init_dim, dim_t *res, int32_t new_width)
+image_scale_status_t image_scale(dim_t *init_dim, dim_t *res, int32_t new_width)
 {
     if (new_width < 1)
         return SCALE_MINIMUM_BOUND;
@@ -21,7 +21,8 @@ image_scale_status image_scale(dim_t *init_dim, dim_t *res, int32_t new_width)
     return SCALE_SUCCESS;
 }
 
-image_load_status image_load(const char *fpath, image_t *img, int32_t req_comp)
+image_load_status_t image_load(const char *fpath, image_t *img,
+                               int32_t req_comp)
 {
     byte *data = stbi_load(fpath, &img->dim.width, &img->dim.height, &img->ch_n,
                            req_comp);
@@ -40,7 +41,7 @@ const size_t PC_COUNT =
 void image_to_ascii(const char *fpath, int32_t width)
 {
     image_t img;
-    image_load_status load_st = image_load(fpath, &img, 1);
+    image_load_status_t load_st = image_load(fpath, &img, 1);
     if (load_st == LOAD_FAIL)
     {
         char message[256];
@@ -50,7 +51,7 @@ void image_to_ascii(const char *fpath, int32_t width)
     }
 
     dim_t new;
-    image_scale_status scale_st =
+    image_scale_status_t scale_st =
         image_scale(&img.dim, &new, width <= 0 ? img.dim.width : width);
     if (scale_st != SCALE_SUCCESS)
         terminate("failed to scale image", 0);
