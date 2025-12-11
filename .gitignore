@@ -1,0 +1,7 @@
+/.clang-format
+/compile_flags.txt
+
+/sample/
+
+/obj/
+/build/
