@@ -2,6 +2,7 @@
 #define __ASCII_IMAGE_IMAGE_H__
 
 #include <stdint.h>
+
 typedef unsigned char byte;
 
 typedef struct

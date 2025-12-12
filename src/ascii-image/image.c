@@ -83,6 +83,8 @@ void image_to_ascii(const char *fpath, int32_t width)
 
         printf("\n");
     }
+
+    stbi_image_free(img.data);
 }
 
 void image_to_ascii_unscaled(const char *fpath) { image_to_ascii(fpath, -1); }
